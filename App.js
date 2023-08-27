@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import {  View, StyleSheet,  SafeAreaView } from 'react-native';
+import RecordSound from './components/RecordSound';
+import { LogBox } from 'react-native';
+import ChatView from './components/ChatView';
+
+const msgs = []
 
 export default function App() {
+  LogBox.ignoreAllLogs();
+  const [messages, setMessages] = React.useState(msgs);
+
+
+
+
   return (
+    <SafeAreaView style={{ flex: 1, backgroundColor:'white' }}>
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <ChatView setMessages={setMessages} messages={messages}/>
+     
+      <RecordSound chatList={messages} setChatList={setMessages} />
+      
+      
+      </View>
+      </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
+    padding: 10,
   },
 });
