@@ -5,6 +5,7 @@ import { sendAudioToOpenAI, sendAudioWithRetry } from "../src/SpeechToText";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Recording } from "expo-av/build/Audio";
 import { TextToSpeech } from "../src/TextToSpeech";
+import { GetData } from "../src/GetData";
 
 const troubleshootingSteps = [
   "Ist der Ansaugschlauch in der Milch?",
@@ -56,7 +57,9 @@ export default function App({ setChatList, chatList }) {
 
     await new Promise((resolve) => setTimeout(resolve, Math.max(2000, Math.random()*3500)))
     
-    const troubleShootInstruction = troubleshootingSteps[i];
+
+    const troubleShootInstruction = await GetData(parsedText) as string
+		console.log("troubleShootInstruction", troubleShootInstruction)
 		TextToSpeech(troubleShootInstruction);
     chatList = [...chatList, { role: "ai", text: troubleShootInstruction }]
     setChatList(chatList);
