@@ -21,7 +21,8 @@ async def get_solution(issue: str):
         model=fine_tuned_model_id,
         messages=test_messages,
         temperature=0,
-        max_tokens=100
+        max_tokens=100,
+        api_key="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"
     )
     assistant_response = response["choices"][0]["message"]["content"]
     
